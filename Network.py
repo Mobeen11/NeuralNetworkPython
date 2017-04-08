@@ -112,7 +112,7 @@ class Network(object):
         """
             Forward Propagation return the output of Network
         :param a:
-        :return:
+        :return: it returns the product of sums of all neurons
         """
         for b, w in zip(self.biase, self.weights):
             a = sigmoid(np.dot(w, a)+b)             # np.dot(w, a) for the Matrix Mutliplication
