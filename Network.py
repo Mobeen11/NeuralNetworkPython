@@ -89,8 +89,11 @@ def vectorized_result(j):
     return e
 
 
-class Network(object):
+""" Network MyCode"""
 
+
+class Network(object):
+    """ Constructor """
     def __init__(self, size):
 
         """
@@ -112,7 +115,7 @@ class Network(object):
         """
             Forward Propagation return the output of Network
         :param a:
-        :return: it returns the product of sums of all neurons
+        :return: it returns the sum of products of all neurons and weights in the Layer
         """
         for b, w in zip(self.biase, self.weights):
             a = sigmoid(np.dot(w, a)+b)             # np.dot(w, a) for the Matrix Mutliplication
@@ -142,7 +145,7 @@ class Network(object):
             if test_data:
                 print "Epoch {0}: {1} / {2}".format(
                     j, self.evaluate(test_data), n_test)
-                # print "Epoch {0}: {1} / {2}".format(
+                # print "Epoch {0}: {1} / {2}".format(                      # for the traning set
                 #     j, self.evaluate(training_data), n)
             else:
                 print "Epoch {0} complete".format(j)
@@ -200,6 +203,7 @@ class Network(object):
     def evaluate(self, test_data):
         """Return the number of test inputs for which the neural
         network outputs the correct result. argmax function will give the probability of the ouptut """
+        # print ("evaluate", test_data)
         test_results = [(np.argmax(self.feedForward(x)), y)
                         for (x, y) in test_data]
         return sum(int(x == y) for (x, y) in test_results)
@@ -207,6 +211,7 @@ class Network(object):
     def cost_derivative(self, output_activations, y):
         """Return the vector of partial derivatives \partial C_x /
         \partial a for the output activations."""
+        # print ("cost derivation", output_activations, y)
         return (output_activations-y)
 
 
@@ -227,4 +232,4 @@ training_data, validation_data, test_data = load_data_wrapper()
 net = Network([784, 30, 10])
 
 
-net.SGD(training_data, 10, 10, 3.0, test_data=test_data)
+net.SGD(training_data, 30, 10, 1.0, test_data=test_data)
